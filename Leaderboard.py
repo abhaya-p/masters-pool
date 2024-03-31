@@ -209,41 +209,41 @@ def fetch_data():
     #df_html = new_df.to_html(index=False)
     
     # csv files in the path
-    file_paths = glob.glob("C:/Users/apras/Desktop/Masters pool/Entry/New Folder/*.xlsx")
+    #file_paths = glob.glob("C:/Users/apras/Desktop/Masters pool/Entry/New Folder/*.xlsx")
     # list of excel files we want to merge.
     #pd.read_excel(file_path) reads the excel
     # data into pandas dataframe.
 
-    dfs = []
+    #dfs = []
 
-    for file_path in file_paths:
-        df2=pd.read_excel(file_path, sheet_name=2, engine='openpyxl')
-        dfs.append(df2)
+    #for file_path in file_paths:
+        #df2=pd.read_excel(file_path, sheet_name=2, engine='openpyxl')
+        #dfs.append(df2)
     
     # Concatenate all the sheet 3 DataFrames into a single DataFrame
-    combined_df = pd.concat(dfs)
+    #combined_df = pd.concat(dfs)
 
     # Define the path and file name for your output Excel file
-    output_path = 'C:/Users/apras/Desktop/Masters pool/Entry.xlsx'
+    #output_path = 'C:/Users/apras/Desktop/Masters pool/Entry.xlsx'
 
     # Write the combined DataFrame to a new Excel file
-    combined_df.to_excel(output_path, index=False)
+    #combined_df.to_excel(output_path, index=False)
 
-    merged_df= pd.merge(combined_df, new_df, left_on='Players', right_on='full_name', how='left').drop('Players', axis=1)
-    return new_df,merged_df
-new_df, merged_df =fetch_data() 
+    #merged_df= pd.merge(combined_df, new_df, left_on='Players', right_on='full_name', how='left').drop('Players', axis=1)
+    #return new_df,merged_df
+new_df=fetch_data() 
         # Pass DataFrame HTML to template
         
         
 @app.route('/generate_dataframe1')
 def display_dataframe1():
-    new_df, _ = fetch_data()
+    new_df = fetch_data()
     return render_template('dataframe.html', dataframe=new_df.to_html())
 
-@app.route('/generate_dataframe2')
-def display_dataframe2():
-    _, merged_df = fetch_data()
-    return render_template('dataframe.html', dataframe=merged_df.to_html())
+#@app.route('/generate_dataframe2')
+#def display_dataframe2():
+    #_, merged_df = fetch_data()
+    #return render_template('dataframe.html', dataframe=merged_df.to_html())
 
 if __name__ == '__main__':
     app.run(debug=True)
